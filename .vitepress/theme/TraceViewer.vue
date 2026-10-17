@@ -149,7 +149,8 @@ watch(speed, () => {
         <div class="tv-state">
           <div v-for="arr in arrays" :key="arr.name" class="tv-array">
             <div class="tv-label">{{ arr.name }}</div>
-            <div class="tv-cells">
+            <div v-if="!arr.cells.length" class="tv-empty">（空陣列）</div>
+            <div v-else class="tv-cells">
               <div
                 v-for="(cell, i) in arr.cells"
                 :key="i"
@@ -393,6 +394,10 @@ watch(speed, () => {
   font-family: var(--vp-font-family-mono);
   font-size: 12px;
   color: var(--vp-c-text-2);
+}
+.tv-empty {
+  font-size: 12px;
+  color: var(--vp-c-text-3);
 }
 .tv-error {
   color: var(--vp-c-danger-1);
