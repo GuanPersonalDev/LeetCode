@@ -5,8 +5,11 @@ trace_solution(
     source="implement_13.py",
     method="Solution.romanToInt",
     cases={
-        "LVIII": {"s": "LVIII"},
-        "MCMXCIV": {"s": "MCMXCIV"},
+        "基本：XIV": {"s": "XIV"},
+        "邊界：單一符號 I": {"s": "I"},
+        "邊界：最大值 MMMCMXCIX": {"s": "MMMCMXCIX"},
+        "複雜：LVIII": {"s": "LVIII"},
+        "複雜：MCMXCIV": {"s": "MCMXCIV"},
     },
     arrays={"s": ["i"]},
     scalars=["total"],

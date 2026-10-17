@@ -5,8 +5,10 @@ trace_solution(
     source="implement_1480.py",
     method="Solution.runningSum",
     cases={
-        "範例 1": {"nums": [1, 2, 3, 4]},
-        "範例 2": {"nums": [3, 1, 2, 10, 1]},
+        "基本：[1,2,3,4]": {"nums": [1, 2, 3, 4]},
+        "邊界：單一元素": {"nums": [1]},
+        "邊界：含負數": {"nums": [-1, -2, 3]},
+        "複雜：[3,1,2,10,1]": {"nums": [3, 1, 2, 10, 1]},
     },
     arrays={"nums": ["i"]},
     scalars=[],

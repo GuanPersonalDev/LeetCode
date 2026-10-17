@@ -5,8 +5,10 @@ trace_solution(
     source="implement_189.py",
     method="Solution.rotate",
     cases={
-        "範例 1": {"nums": [1, 2, 3, 4, 5, 6, 7], "k": 3},
-        "範例 2": {"nums": [-1, -100, 3, 99], "k": 2},
+        "基本：官方範例 1": {"nums": [1, 2, 3, 4, 5, 6, 7], "k": 3},
+        "邊界：k = 0": {"nums": [1, 2, 3], "k": 0},
+        "邊界：k 大於長度": {"nums": [1, 2], "k": 3},
+        "複雜：含負數": {"nums": [-1, -100, 3, 99], "k": 2},
     },
     arrays={"nums": []},
     scalars=["n", "k"],

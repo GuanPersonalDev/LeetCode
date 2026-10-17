@@ -5,8 +5,11 @@ trace_solution(
     source="implement_121.py",
     method="Solution.maxProfit",
     cases={
-        "範例 1": {"prices": [7, 1, 5, 3, 6, 4]},
-        "範例 2": {"prices": [7, 6, 4, 3, 1]},
+        "基本：官方範例 1": {"prices": [7, 1, 5, 3, 6, 4]},
+        "邊界：只有一天": {"prices": [5]},
+        "邊界：一路下跌": {"prices": [7, 6, 4, 3, 1]},
+        "複雜：最低價出現在後段": {"prices": [3, 2, 6, 5, 0, 3]},
+        "複雜：[2,4,1,7,0,6]": {"prices": [2, 4, 1, 7, 0, 6]},
     },
     arrays={"prices": []},
     scalars=["p", "min_price", "new_profit", "max_profit"],

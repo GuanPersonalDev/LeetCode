@@ -5,7 +5,9 @@ trace_solution(
     source="implement_412.py",
     method="Solution.fizzBuzz",
     cases={
-        "n = 15": {"n": 15},
+        "基本：n = 5": {"n": 5},
+        "邊界：n = 1": {"n": 1},
+        "複雜：n = 15": {"n": 15},
     },
     arrays={"result": []},
     scalars=["i", "str"],

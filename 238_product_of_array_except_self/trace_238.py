@@ -5,8 +5,10 @@ trace_solution(
     source="implement_238.py",
     method="Solution.productExceptSelf",
     cases={
-        "範例 1": {"nums": [1, 2, 3, 4]},
-        "範例 2": {"nums": [-1, 1, 0, -3, 3]},
+        "基本：[1,2,3,4]": {"nums": [1, 2, 3, 4]},
+        "邊界：兩個元素": {"nums": [2, 3]},
+        "邊界：兩個 0": {"nums": [0, 0]},
+        "複雜：含負數與一個 0": {"nums": [-1, 1, 0, -3, 3]},
     },
     arrays={"nums": ["i"], "answer": ["i"]},
     scalars=["left_product", "right_product"],

@@ -5,8 +5,11 @@ trace_solution(
     source="implement_274.py",
     method="Solution.hIndex",
     cases={
-        "範例 1": {"citations": [3, 0, 6, 1, 5]},
-        "範例 2": {"citations": [1, 3, 1]},
+        "基本：官方範例 1": {"citations": [3, 0, 6, 1, 5]},
+        "邊界：一篇、沒被引用": {"citations": [0]},
+        "邊界：一篇、引用次數超過論文數": {"citations": [100]},
+        "複雜：[1,3,1]": {"citations": [1, 3, 1]},
+        "複雜：[10,8,5,4,3]": {"citations": [10, 8, 5, 4, 3]},
     },
     arrays={"citations": [], "counter": ["i"]},
     scalars=["c", "cited_count"],

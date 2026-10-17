@@ -5,8 +5,11 @@ trace_solution(
     source="implement_42.py",
     method="Solution.trap",
     cases={
-        "範例 1": {"height": [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]},
-        "範例 2": {"height": [4, 2, 0, 3, 2, 5]},
+        "基本：[2,0,2]": {"height": [2, 0, 2]},
+        "邊界：單一柱子": {"height": [4]},
+        "邊界：遞增接不到水": {"height": [1, 2, 3]},
+        "複雜：官方範例 1": {"height": [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]},
+        "複雜：官方範例 2": {"height": [4, 2, 0, 3, 2, 5]},
     },
     arrays={"height": ["left_index", "right_index"]},
     scalars=["left_max", "right_max", "total"],

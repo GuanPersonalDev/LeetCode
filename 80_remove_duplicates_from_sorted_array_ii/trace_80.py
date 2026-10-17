@@ -5,8 +5,10 @@ trace_solution(
     source="implement_80.py",
     method="Solution.removeDuplicates",
     cases={
-        "範例 1": {"nums": [1, 1, 1, 2, 2, 3]},
-        "範例 2": {"nums": [0, 0, 1, 1, 1, 1, 2, 3, 3]},
+        "基本：[1,1,1,2,2,3]": {"nums": [1, 1, 1, 2, 2, 3]},
+        "邊界：單一元素": {"nums": [1]},
+        "邊界：全部相同": {"nums": [1, 1, 1, 1]},
+        "複雜：官方範例 2": {"nums": [0, 0, 1, 1, 1, 1, 2, 3, 3]},
     },
     arrays={"nums": ["current_index"]},
     scalars=["n"],

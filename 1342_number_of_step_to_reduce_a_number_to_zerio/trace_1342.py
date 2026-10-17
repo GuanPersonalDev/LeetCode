@@ -5,8 +5,10 @@ trace_solution(
     source="implement_1342.py",
     method="Solution.numberOfSteps",
     cases={
-        "num = 14": {"num": 14},
-        "num = 123": {"num": 123},
+        "基本：14": {"num": 14},
+        "邊界：0": {"num": 0},
+        "邊界：1": {"num": 1},
+        "複雜：123": {"num": 123},
     },
     arrays={},
     scalars=["num", "count"],

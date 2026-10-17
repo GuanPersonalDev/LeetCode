@@ -5,8 +5,11 @@ trace_solution(
     source="implement_45.py",
     method="Solution.jump",
     cases={
-        "範例 1": {"nums": [2, 3, 1, 1, 4]},
-        "範例 2": {"nums": [2, 3, 0, 1, 4]},
+        "基本：[2,3,1,1,4]": {"nums": [2, 3, 1, 1, 4]},
+        "邊界：單一元素": {"nums": [0]},
+        "邊界：每格只能跳 1": {"nums": [1, 1, 1]},
+        "複雜：[2,3,0,1,4]": {"nums": [2, 3, 0, 1, 4]},
+        "複雜：[5,9,3,2,1,0,2,3,3,1,0,0]": {"nums": [5, 9, 3, 2, 1, 0, 2, 3, 3, 1, 0, 0]},
     },
     arrays={"nums": ["i", "current_jump_limit", "farthest_index"]},
     scalars=["step_count"],

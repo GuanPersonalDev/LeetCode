@@ -5,8 +5,9 @@ trace_solution(
     source="implement_169.py",
     method="Solution.majorityElement",
     cases={
-        "範例 1": {"nums": [3, 2, 3]},
-        "範例 2": {"nums": [2, 2, 1, 1, 1, 2, 2]},
+        "基本：[3,2,3]": {"nums": [3, 2, 3]},
+        "邊界：單一元素": {"nums": [1]},
+        "複雜：官方範例 2": {"nums": [2, 2, 1, 1, 1, 2, 2]},
     },
     arrays={"nums": []},
     scalars=["i", "num", "counter"],
