@@ -64,23 +64,28 @@ const changed = (name: string) =>
 
 const format = (value: unknown) => (value === undefined ? '—' : JSON.stringify(value))
 
+// 字串當成字元陣列畫；尚未賦值或不是序列時視為空
+const asList = (value: unknown): unknown[] =>
+  Array.isArray(value) ? value : typeof value === 'string' ? [...value] : []
+
 const arrays = computed(() => {
   if (!trace.value || !step.value) return []
   return Object.entries(trace.value.view.arrays).map(([name, pointers]) => {
-    const values = (step.value!.vars[name] as unknown[] | undefined) ?? []
-    const before = (prev.value?.vars[name] as unknown[] | undefined) ?? values
+    const values = asList(step.value!.vars[name])
+    const before = prev.value ? asList(prev.value.vars[name]) : values
     // 以整段追蹤的最大值當刻度，播放時長條高度才不會跳動
     const max = Math.max(
       1,
-      ...steps.value.flatMap((s) => ((s.vars[name] as unknown[]) ?? []).filter((v): v is number => typeof v === 'number')),
+      ...steps.value.flatMap((s) => asList(s.vars[name]).filter((v): v is number => typeof v === 'number')),
     )
     const cells = values.map((value, i) => ({
       value,
       height: typeof value === 'number' ? Math.max(value / max, 0) : null,
       changed: prev.value !== undefined && JSON.stringify(before[i]) !== JSON.stringify(value),
-      pointers: pointers.filter((p) => step.value!.vars[p] === i),
+      // 每個指標固定一列，相鄰格子的長名稱才不會疊在一起
+      slots: pointers.map((p) => (step.value!.vars[p] === i ? p : null)),
     }))
-    return { name, cells }
+    return { name, cells, hasBars: cells.some((c) => c.height !== null) }
   })
 })
 
@@ -145,14 +150,21 @@ watch(speed, () => {
           <div v-for="arr in arrays" :key="arr.name" class="tv-array">
             <div class="tv-label">{{ arr.name }}</div>
             <div class="tv-cells">
-              <div v-for="(cell, i) in arr.cells" :key="i" class="tv-cell" :class="{ changed: cell.changed, pointed: cell.pointers.length }">
-                <div class="tv-bar-area">
+              <div
+                v-for="(cell, i) in arr.cells"
+                :key="i"
+                class="tv-cell"
+                :class="{ changed: cell.changed, pointed: cell.slots.some(Boolean), text: cell.height === null }"
+              >
+                <div v-if="arr.hasBars" class="tv-bar-area">
                   <div v-if="cell.height !== null" class="tv-bar" :style="{ height: `${cell.height * 100}%` }" />
                 </div>
-                <div class="tv-value">{{ typeof cell.value === 'number' ? cell.value : format(cell.value) }}</div>
+                <div class="tv-value">{{ typeof cell.value === 'number' || typeof cell.value === 'string' ? cell.value : format(cell.value) }}</div>
                 <div class="tv-index">{{ i }}</div>
                 <div class="tv-pointers">
-                  <span v-for="p in cell.pointers" :key="p" class="tv-pointer">{{ p }}</span>
+                  <div v-for="(p, k) in cell.slots" :key="k" class="tv-slot">
+                    <span v-if="p" class="tv-pointer">{{ p }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -275,6 +287,19 @@ watch(speed, () => {
   font-family: var(--vp-font-family-mono);
   font-size: 12px;
 }
+.tv-cell.text {
+  flex: 0 0 auto;
+  min-width: 28px;
+  padding: 0 4px;
+}
+.tv-cell.text .tv-value {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+.tv-cell.text.pointed .tv-value {
+  border-color: var(--vp-c-brand-1);
+}
 .tv-bar-area {
   display: flex;
   align-items: flex-end;
@@ -304,12 +329,10 @@ watch(speed, () => {
   color: var(--vp-c-text-3);
   font-size: 10px;
 }
-.tv-pointers {
+.tv-slot {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  min-height: 18px;
+  justify-content: center;
+  height: 18px;
 }
 .tv-pointer {
   padding: 0 3px;
