@@ -23,7 +23,7 @@ export default defineConfig({
   description: '每題用過的解法與逐步動態圖解',
   base: '/LeetCode/',
   srcDir: '.',
-  srcExclude: ['**/node_modules/**', '.venv/**', '.idea/**', 'templates/**', 'README.md'],
+  srcExclude: ['**/node_modules/**', '.venv/**', '.idea/**', 'templates/**', '.claude/**', 'README.md'],
   rewrites: { ':dir/note.md': ':dir/index.md' },
   cleanUrls: true,
   lastUpdated: true,
